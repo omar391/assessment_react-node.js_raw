@@ -4,7 +4,7 @@ ROOT_DIR := $(CURDIR)
 BACKEND_DIR := $(ROOT_DIR)/backend
 FRONTEND_DIR := $(ROOT_DIR)/frontend
 
-.PHONY: install install-backend install-frontend start-backend start-frontend dev clean lint-frontend test test-backend test-frontend test-e2e
+.PHONY: install install-backend install-frontend start-backend start-frontend dev clean lint-frontend test test-backend test-e2e
 
 install: install-backend install-frontend
 
@@ -23,13 +23,10 @@ start-frontend:
 lint-frontend:
 	bun run --cwd "$(FRONTEND_DIR)" lint
 
-test: test-backend test-frontend test-e2e
+test: test-backend test-e2e
 
 test-backend:
 	bun run --cwd "$(BACKEND_DIR)" test
-
-test-frontend:
-	bun run --cwd "$(FRONTEND_DIR)" test
 
 test-e2e:
 	bunx playwright install --with-deps

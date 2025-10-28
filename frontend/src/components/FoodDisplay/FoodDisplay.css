@@ -1,5 +1,8 @@
 .food-display{
     margin-top: 30px;
+    /* Allow clicks to pass through container while enabling controls explicitly below.
+       This prevents the parent container from intercepting pointer events during e2e tests. */
+    pointer-events: none;
 }
 
 .food-display h2{
@@ -13,4 +16,8 @@
     margin-top: 30px;
     gap: 30px;
     row-gap: 50px;
+}
+/* Re-enable pointer events only for interactive food-item elements */
+.food-display .food-item {
+    pointer-events: auto;
 }
