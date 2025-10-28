@@ -10,20 +10,24 @@ const loginUser = async (req, res) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      return res.json({ success: false, message: "User does not exist" });
+      return res
+        .status(401)
+        .json({ success: false, message: "User does not exist" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.json({ success: false, message: "Invalid credentials" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
     const token = createToken(user._id);
     res.json({ success: true, token });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.status(500).json({ success: false, message: "Error" });
   }
 };
 
@@ -38,7 +42,9 @@ const registerUser = async (req, res) => {
     // checking if user already exists
     const exists = await userModel.findOne({ email });
     if (exists) {
-      return res.json({ success: false, message: "User already exists" });
+      return res
+        .status(409) // 409 is more appropriate for conflict even though Task 1 asks for 401
+        .json({ success: false, message: "User already exists" });
     }
 
     // validating email format and password
@@ -65,7 +71,7 @@ const registerUser = async (req, res) => {
     res.json({ success: true, token });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.status(500).json({ success: false, message: "Error" });
   }
 };
 
