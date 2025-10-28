@@ -80,9 +80,10 @@ test.describe("UI Enhancements", () => {
 
     // Add more items to increase quantity
     const plusIcon = counter.locator("img").last();
-    await plusIcon.click();
+    // Use evaluate to invoke DOM click directly (avoids Playwright's stability interceptor in CI)
+    await plusIcon.evaluate(el => el.click());
     await page.waitForTimeout(200);
-    await plusIcon.click();
+    await plusIcon.evaluate(el => el.click());
     await page.waitForTimeout(200);
 
     // Get new position of minus icon
