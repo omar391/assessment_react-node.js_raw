@@ -10,6 +10,7 @@
 .food-item-image{
     width: 100%;
     border-radius: 15px 15px 0px 0px;
+    transition: transform 0.3s ease;
 }
 
 .food-item-info{
@@ -46,6 +47,11 @@
 
 .food-item-img-container{
     position: relative;
+    overflow: hidden;
+}
+
+.food-item-img-container:hover .food-item-image{
+    transform: scale(1.05);
 }
 
 .food-item-img-container .add{
@@ -63,12 +69,19 @@
     right: 15px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
-    padding: 6px;
+    padding: 6px 12px;
     border-radius: 50px;
     background-color: white;
+    min-width: 120px;
 }
 
 .food-item-counter img{
     width: 30px;
+}
+
+.food-item-counter p{
+    width: 32px;
+    text-align: center;
 }
