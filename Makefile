@@ -32,7 +32,7 @@ test-frontend:
 	bun run --cwd "$(FRONTEND_DIR)" test
 
 test-e2e:
-	bunx playwright install --with-deps
+	-bunx playwright install --with-deps chromium || echo "Warning: Playwright browser installation failed, trying to continue..."
 	bun run --cwd "$(FRONTEND_DIR)" test:e2e
 
 dev:

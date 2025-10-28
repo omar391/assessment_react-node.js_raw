@@ -8,5 +8,8 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:3000'
     }
+  },
+  test: {
+    exclude: ['**/node_modules/**', '**/dist/**', '**/e2e/**']
   }
 })
