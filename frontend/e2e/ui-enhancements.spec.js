@@ -69,7 +69,7 @@ test.describe("UI Enhancements", () => {
 
     // Add item to cart to show counter
     await addButton.click();
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(1000);
 
     const counter = foodItem.locator(".food-item-counter");
     const minusIcon = counter.locator("img").first();
@@ -78,8 +78,11 @@ test.describe("UI Enhancements", () => {
     const initialBox = await minusIcon.boundingBox();
     expect(initialBox).not.toBeNull();
 
-    // Add more items to increase quantity
+    // Add more items to increase quantity - using direct element interaction
     const plusIcon = counter.locator("img").last();
+    
+    // Wait for any animations to complete and element to be stable
+    await page.waitForTimeout(500);
     await plusIcon.click({ force: true });
     await page.waitForTimeout(500);
     await plusIcon.click({ force: true });

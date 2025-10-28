@@ -32,9 +32,13 @@ test-frontend:
 	bun run --cwd "$(FRONTEND_DIR)" test
 
 test-e2e:
-	@if [ ! -d "$(HOME)/.cache/ms-playwright/chromium-1194" ]; then \
+	@if ! command -v xvfb-run > /dev/null 2>&1; then \
+		echo "Installing Playwright dependencies..."; \
+		bunx playwright install-deps || true; \
+	fi
+	@if ! test -d "$(HOME)/.cache/ms-playwright/chromium-"*; then \
 		echo "Installing Playwright browsers..."; \
-		bunx playwright install --with-deps chromium || echo "Warning: Playwright browser installation failed"; \
+		bunx playwright install chromium || echo "Warning: Playwright browser installation may have failed"; \
 	fi
 	PLAYWRIGHT_BROWSERS_PATH=$(HOME)/.cache/ms-playwright DISPLAY=:99 bun run --cwd "$(FRONTEND_DIR)" test:e2e
 
