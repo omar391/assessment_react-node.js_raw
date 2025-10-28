@@ -32,8 +32,11 @@ test-frontend:
 	bun run --cwd "$(FRONTEND_DIR)" test
 
 test-e2e:
-	-bunx playwright install --with-deps chromium || echo "Warning: Playwright browser installation failed, trying to continue..."
-	bun run --cwd "$(FRONTEND_DIR)" test:e2e
+	@if [ ! -d "$(HOME)/.cache/ms-playwright/chromium-1194" ]; then \
+		echo "Installing Playwright browsers..."; \
+		bunx playwright install --with-deps chromium || echo "Warning: Playwright browser installation failed"; \
+	fi
+	PLAYWRIGHT_BROWSERS_PATH=$(HOME)/.cache/ms-playwright DISPLAY=:99 bun run --cwd "$(FRONTEND_DIR)" test:e2e
 
 dev:
 	@echo "Starting backend (port 4000) and frontend (Vite)"
