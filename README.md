@@ -27,6 +27,12 @@ This is a full-stack food ordering web application built using the MERN stack (M
 ## Test Problems
 1. **Complete the tasks**:
 
+| Task | README description | What we changed / How we solved it | Commit |
+|------|--------------------|------------------------------------|--------|
+| Task 1 | Figure out the authentication issues — login/registration return 200 instead of 401 | backend: return 401 on failed login/registration; updated tests | 70a74cd |
+| Task 2 | Add a zoom-in effect on hover for each menu image | frontend: menu image hover zoom CSS added | 8812f0d |
+| Task 3 | Ensure the “-” (minus) icon maintains position when quantity changes | frontend: order counter CSS alignment fixes | 4ae0f99 |
+
 △ Task 1 - Figure out the authentication issues (For full-stack and back-end only)
 - Login: Return 401 Unauthorized if credentials are incorrect (currently returns 200 OK).
 - Registration: Return 401 Unauthorized if the user already exists (currently returns 200 OK).
